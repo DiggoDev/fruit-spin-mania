@@ -21,7 +21,7 @@ export class Game {
 		// Init
 		addDevTools(this.app);
 		// Intialize the application.
-		await this.app.init({ background: '#1099bb', resizeTo: window });
+		await this.app.init({ background: '#FFFFFF', resizeTo: window });
 		// Then adding the application's canvas to the DOM body.
 		document.body.appendChild(this.app.canvas);
 
