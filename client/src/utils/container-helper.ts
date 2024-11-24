@@ -1,8 +1,12 @@
 import { Container, Sprite } from "pixi.js";
 
-export function resizeContainerAfterWindow(sprite: Container, scaleWidth = 1, scaleHeight = 1) {
-    sprite.width = window.innerWidth * scaleWidth;
-    sprite.height = window.innerHeight * scaleHeight;
+export function resizeContainerAfterWindow(container: Container, scaleWidth = 1, scaleHeight = 1) {
+    container.width = window.innerWidth * scaleWidth;
+    container.height = window.innerHeight * scaleHeight;
+}
+export function resizeContainerAfterOtherContainer(container: Container, otherContainer: Container, scaleWidth = 1, scaleHeight = 1) {
+    container.width = otherContainer.width * scaleWidth;
+    container.height = otherContainer.height * scaleHeight;
 }
 
 export function centerContainer(child: Container, parentContainer: Container) {

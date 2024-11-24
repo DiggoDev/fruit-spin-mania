@@ -1,16 +1,35 @@
 import { Sprite, Texture, Container } from "pixi.js";
-import { resizeContainerAfterWindow } from "../utils/container-helper";
+import { resizeContainerAfterOtherContainer, resizeContainerAfterWindow } from "../utils/container-helper";
+import { SymbolReelGrid } from "../components/symbol-reel-grid";
+import { reelHeight, reelWidth } from "../config/reel-config";
 
 export class ReelsContainerEntity extends Container {
-    constructor(reelBackgroundTexture: Texture, reelFrameTexture: Texture) {
+    readonly symbolReelGrid: SymbolReelGrid
+    readonly reelBackground: Sprite
+    readonly reelFrame: Sprite
+    constructor(reelBackgroundTexture: Texture, reelFrameTexture: Texture, symbolTextures: Record<number, Texture>) {
         super()
-        const reelBackground = new Sprite(reelBackgroundTexture)
-        const reelScaleWidth = 0.7
-        const reelScaleHeight = 0.85
-        resizeContainerAfterWindow(reelBackground, reelScaleWidth, reelScaleHeight)
-        const reelFrame = new Sprite(reelFrameTexture)
-        resizeContainerAfterWindow(reelFrame, reelScaleWidth, reelScaleHeight)
-        this.addChild(reelBackground)
-        this.addChild(reelFrame)
+        this.symbolReelGrid = new SymbolReelGrid(reelWidth, reelHeight, symbolTextures)
+        this.symbolReelGrid.fillGridWithSymbol(1)
+
+        this.reelBackground = new Sprite(reelBackgroundTexture)
+        this.reelFrame = new Sprite(reelFrameTexture)
+
+        this.resizeObjects()
+        
+        this.addChild(this.reelBackground)
+        this.addChild(this.reelFrame)
+        this.addChild(this.symbolReelGrid)
+
+        this.symbolReelGrid.addSpritesToGrid()
+        
+    }
+
+    private resizeObjects() {
+        const reelScaleWidth = 0.27
+        const reelScaleHeight = 0.35
+        resizeContainerAfterWindow(this.reelBackground, reelScaleWidth, reelScaleHeight)
+        resizeContainerAfterOtherContainer(this.symbolReelGrid, this.reelBackground, 0.9, 0.9)
+        resizeContainerAfterWindow(this.reelFrame, reelScaleWidth, reelScaleHeight)
     }
 }

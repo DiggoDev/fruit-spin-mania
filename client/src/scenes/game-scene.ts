@@ -1,8 +1,10 @@
-import { Assets, Sprite } from 'pixi.js';
+import { Assets, Sprite, Texture } from 'pixi.js';
 
 import backgroundImage from '../assets/background.png'
 import reelsBackgroundImage from '../assets/reel-background.png'
 import reelsFrameImage from '../assets/reel-frame.png'
+import symbol1Image from '../assets/symbol1.png'
+import symbol2Image from '../assets/symbol2.png'
 
 import { Scene } from './scene';
 import { ReelsContainerEntity } from '../entities/reels-container-entity';
@@ -21,7 +23,11 @@ export class GameScene extends Scene {
 		this.addChild(background)
 		const reelsBackgroundTexture = await Assets.load(reelsBackgroundImage)
 		const reelsFrameTexture = await Assets.load(reelsFrameImage)
-		const reelsContainer = new ReelsContainerEntity(reelsBackgroundTexture, reelsFrameTexture)
+		const symbolTextures: Record<number, Texture> = {
+			1: await Assets.load(symbol1Image),
+			2: await Assets.load(symbol2Image),
+		}
+		const reelsContainer = new ReelsContainerEntity(reelsBackgroundTexture, reelsFrameTexture, symbolTextures)
 
 		centerContainer(reelsContainer, this)
 
