@@ -1,8 +1,14 @@
 {
   "name": "fruit-spin-mania",
   "version": "0.0.1",
+  "private": "true",
   "workspaces": [
     "client"
   ],
-  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
+  "scripts": {
+    "start:client": "yarn run --cwd client start",
+    "start:server": "yarn run --cwd server start"
+  },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
+  "license": "MIT"
 }

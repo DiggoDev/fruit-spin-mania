@@ -1,0 +1,16 @@
+html, body {
+    margin: 0;       /* Remove default margin */
+    padding: 0;      /* Remove default padding */
+    overflow: hidden; /* Prevent scrollbars */
+    width: 100%;     /* Ensure full-width */
+    height: 100%;    /* Ensure full-height */
+}
+
+canvas {
+    display: block;  /* Remove inline canvas scroll issue */
+}
+
+#app-container {
+    margin: 0;
+    padding: 0;
+}

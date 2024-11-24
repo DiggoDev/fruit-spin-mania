@@ -6,6 +6,7 @@ import reelsFrameImage from '../assets/reel-frame.png'
 
 import { Scene } from './scene';
 import { ReelsContainerEntity } from '../entities/reels-container-entity';
+import { centerContainer, resizeContainerAfterWindow } from '../utils/container-helper';
 
 export class GameScene extends Scene {
 
@@ -16,13 +17,14 @@ export class GameScene extends Scene {
 	public async init() {
 		const backgroundTexture = await Assets.load(backgroundImage)
 		const background = new Sprite(backgroundTexture)
+		resizeContainerAfterWindow(background)
 		this.addChild(background)
 		const reelsBackgroundTexture = await Assets.load(reelsBackgroundImage)
 		const reelsFrameTexture = await Assets.load(reelsFrameImage)
 		const reelsContainer = new ReelsContainerEntity(reelsBackgroundTexture, reelsFrameTexture)
 
-		reelsContainer.x = this.width / 4
-		reelsContainer.y = this.height / 4
+		centerContainer(reelsContainer, this)
+
 		this.addChild(reelsContainer)
 	}
 
