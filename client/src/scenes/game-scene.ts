@@ -9,6 +9,7 @@ import symbol2Image from '../assets/symbol2.png'
 import { Scene } from './scene';
 import { ReelsContainerEntity } from '../entities/reels-container-entity';
 import { centerContainer, resizeContainerAfterWindow } from '../utils/container-helper';
+import { GameUiEntity } from '../entities/game-ui-entity';
 
 export class GameScene extends Scene {
 
@@ -28,10 +29,12 @@ export class GameScene extends Scene {
 			2: await Assets.load(symbol2Image),
 		}
 		const reelsContainer = new ReelsContainerEntity(reelsBackgroundTexture, reelsFrameTexture, symbolTextures)
+		const ui = new GameUiEntity()
 
 		centerContainer(reelsContainer, this)
 
 		this.addChild(reelsContainer)
+		this.addChild(ui)
 	}
 
 	public async update(delta: number) {
