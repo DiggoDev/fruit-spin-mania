@@ -35,8 +35,18 @@ export class GameScene extends Scene {
 
 		this.addChild(reelsContainer)
 		this.addChild(ui)
+
+		this.handleEvents(reelsContainer, ui)
 	}
 
 	public async update(delta: number) {
+	}
+
+	private handleEvents(reelsContainer: ReelsContainerEntity, ui: GameUiEntity) {
+		// TODO update to random symbols on spin
+		ui.spinButton.onSpinButtonClicked(() => {
+			reelsContainer.symbolReelGrid.fillGridWithSymbol(2)
+			reelsContainer.symbolReelGrid.addSpritesToGrid()
+		})
 	}
 }

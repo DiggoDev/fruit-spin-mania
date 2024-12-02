@@ -23,10 +23,7 @@ export class GameUiEntity extends Container {
             width: windowWidth,
             height: this.spinButton.height,
         })
-        // this.background.x = 0
-        // this.background.y = 0
-        // this.background.width = windowWidth
-        // this.background.height = windowHeight
+        
         this.addChild(this.background)
         this.addChild(this.spinButton)
     }
