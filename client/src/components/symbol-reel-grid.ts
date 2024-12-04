@@ -33,6 +33,14 @@ export class SymbolReelGrid extends Container {
             }
         }
     }
+
+    public setGridWithSymbols(symbols: number[][]) {
+        for (let width = 0; width < this.gridWidth; width++) {
+            for  (let height = 0; height < this.gridHeight; height++) {
+                this.grid[width][height] = symbols[width][height]
+            }
+        }
+    }
     
     public addSpritesToGrid() {
         for (let x = 0; x < this.gridWidth; x++) {

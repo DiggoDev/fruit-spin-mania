@@ -44,8 +44,10 @@ export class GameScene extends Scene {
 
 	private handleEvents(reelsContainer: ReelsContainerEntity, ui: GameUiEntity) {
 		// TODO update to random symbols on spin
-		ui.spinButton.onSpinButtonClicked(() => {
-			reelsContainer.symbolReelGrid.fillGridWithSymbol(2)
+		ui.spinButton.onSpinButtonClicked(async () => {
+			const response = await this.api.game.getGameRequest()
+			reelsContainer.symbolReelGrid.setGridWithSymbols(response.symbols)
+			// reelsContainer.symbolReelGrid.fillGridWithSymbol(2)
 			reelsContainer.symbolReelGrid.addSpritesToGrid()
 		})
 	}

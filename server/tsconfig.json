@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                          // Target modern JavaScript
+    "module": "CommonJS",                     // Use CommonJS for Node.js
+    "outDir": "./dist",                       // Output directory
+    "rootDir": "./src",                       // Source directory
+    "strict": true,                           // Enable strict type checking
+    "esModuleInterop": true,                  // Import compatibility
+    "skipLibCheck": true                      // Skip library type checks
+  }
+}

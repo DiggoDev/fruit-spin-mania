@@ -1,8 +1,11 @@
 import { Container } from 'pixi.js';
+import { Api } from '../api/api';
 
 export class Scene extends Container {
+	protected readonly api: Api
 	constructor() {
 		super();
+		this.api = new Api()
 	}
 
 	async init(): Promise<void> {
