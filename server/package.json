@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts"
+    "dev": "nodemon"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -17,6 +17,7 @@
     "@types/cors": "^2",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.1",
+    "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }
