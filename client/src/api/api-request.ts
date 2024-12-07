@@ -15,16 +15,26 @@ export class ApiRequest {
         console.log('baseUrl: ' + this.baseUrl)
     }
 
-    protected async makeGet(path: string, options?: ApiRequestOptions) {
+    protected async makeJsonGet(path: string, options?: ApiRequestOptions) {
         const url = this.getUrl(path)
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            }
+        });
         this.checkResponse('GET', response, url, options)
         return response.data
     }
 
-    protected async makePost(path: string, body: any, options?: ApiRequestOptions) {
+    protected async makeJsonPost(path: string, body: any, options?: ApiRequestOptions) {
         const url = this.getUrl(path)
-        const response = await axios.get(url);
+        const response = await axios.post(url, body, {
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            }
+        });
         this.checkResponse('POST', response, url, options)
         return response.data
     }

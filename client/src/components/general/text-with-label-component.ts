@@ -19,4 +19,10 @@ export class TextWithLabelComponent extends Container {
         this.addChild(this.labelComponent)
         this.addChild(this.valueComponent)
     }
+
+    public updateValue(newValue: string) {
+        this.valueComponent.text = newValue
+        this.width = this.labelComponent.width + this.valueComponent.width + 15
+        console.log(`value updated for text to ${newValue}`)
+    }
 }

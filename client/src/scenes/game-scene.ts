@@ -15,9 +15,18 @@ import { centerContainer, resizeContainerAfterWindow } from '../utils/container-
 import { GameUiEntity } from '../entities/game-ui-entity';
 
 export class GameScene extends Scene {
+	private gameState: {
+		accountId: number
+		balance: number
+	}
+	private ui = new GameUiEntity()
 
 	public constructor() {
 		super();
+		this.gameState = {
+			accountId: -1,
+			balance: -1
+		}
 	}
 
 	public async init() {
@@ -35,26 +44,48 @@ export class GameScene extends Scene {
 			5: await Assets.load(symbol5Image),
 		}
 		const reelsContainer = new ReelsContainerEntity(reelsBackgroundTexture, reelsFrameTexture, symbolTextures)
-		const ui = new GameUiEntity()
+		this.ui = new GameUiEntity()
 
 		centerContainer(reelsContainer, this)
 
 		this.addChild(reelsContainer)
-		this.addChild(ui)
+		this.addChild(this.ui)
 
-		this.handleEvents(reelsContainer, ui)
+		this.handleEvents(reelsContainer, this.ui)
+		this.createNewAccount()
+			.then((data) => {
+				this.gameState.accountId = data.accountId
+				console.log(`New account with id ${this.gameState.accountId}`)
+			})
+			.then(async () => {
+				const { balance } = await this.getBalance()
+				this.gameState.balance = balance
+				console.log(`New balance ${this.gameState.balance}`)
+			})
+			.then(() => {
+				this.ui.updateBalance(this.gameState.balance)
+				console.log(`Balance updated to ${this.gameState.balance}`)
+			})
 	}
 
 	public async update(delta: number) {
 	}
 
 	private handleEvents(reelsContainer: ReelsContainerEntity, ui: GameUiEntity) {
-		// TODO update to random symbols on spin
 		ui.spinButton.onSpinButtonClicked(async () => {
 			const response = await this.api.game.getGameRequest()
 			reelsContainer.symbolReelGrid.setGridWithSymbols(response.symbols)
 			// reelsContainer.symbolReelGrid.fillGridWithSymbol(2)
 			reelsContainer.symbolReelGrid.addSpritesToGrid()
 		})
+	}
+
+	private async createNewAccount() {
+		return await this.api.account.setAccountRequest({ balance: 1000 })
+	}
+
+	private async getBalance() {
+		if (this.gameState.accountId == -1) throw new Error('AccountId in gameState was undefined')
+		return await this.api.account.getBalance(this.gameState.accountId)
 	}
 }

@@ -17,13 +17,16 @@ router.post('/set-account', (req: Request, res: Response<{ accountId: number }>)
         accounts[id] = account
         nextAccountId++
 
-        return res.status(204).send({ accountId: id })
+        const resBody = { accountId: id }
+        console.log(`POST /set-account: send ${JSON.stringify(resBody)}`)
+
+        return res.status(200).send(resBody)
     }, req, res)
 });
 
-router.get('/balance', (req, res) => {
+router.get('/balance/:accountId', (req, res) => {
     requestErrorHandlingWrapper((req, res) => {
-        const { accountId }: { accountId: number } = req.body
+        const accountId = Number(req.params['accountId'])
         if (!accounts[accountId]) return res.status(404).send(`account with id ${accountId} not found`)
         
         const balance = accounts[accountId].balance

@@ -6,7 +6,7 @@ interface GetGameResponse {
 
 export class GameApi extends ApiRequest {
     public async getGameRequest() {
-        const data = await this.makeGet('/get-new-request', { expectedStatus: 200 })
+        const data = await this.makeJsonGet('/get-new-request', { expectedStatus: 200 })
         return data as GetGameResponse
     }
 }

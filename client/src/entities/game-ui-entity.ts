@@ -47,4 +47,9 @@ export class GameUiEntity extends Container {
         this.addChild(this.betDisplay)
         this.addChild(this.spinButton)
     }
+
+    public updateBalance(balance: number) {
+        this.balanceDisplay.updateBalance(balance)
+        this.betDisplay.x = 10 + this.balanceDisplay.width
+    }
 }
