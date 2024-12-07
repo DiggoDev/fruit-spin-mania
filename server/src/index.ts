@@ -2,8 +2,10 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 
 import gameRouter from './routes/game'
+import accountRouter from './routes/account'
+import sessionRouter from './routes/session'
 
-const allowedHostname = 'http://localhost:1234'; // Replace with your hostname
+const allowedHostname = 'http://localhost:1234';
 
 // Create an Express application
 const app = express();
@@ -27,6 +29,8 @@ app.use(express.json());
 
 
 app.use('/game/', gameRouter)
+app.use('/account/', accountRouter)
+app.use('/session/', sessionRouter)
 
 // Example route
 app.get('/', (req: Request, res: Response) => {

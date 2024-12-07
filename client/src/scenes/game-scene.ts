@@ -5,6 +5,9 @@ import reelsBackgroundImage from '../assets/reel-background.png'
 import reelsFrameImage from '../assets/reel-frame.png'
 import symbol1Image from '../assets/symbol1.png'
 import symbol2Image from '../assets/symbol2.png'
+import symbol3Image from '../assets/symbol3.png'
+import symbol4Image from '../assets/symbol4.png'
+import symbol5Image from '../assets/symbol5.png'
 
 import { Scene } from './scene';
 import { ReelsContainerEntity } from '../entities/reels-container-entity';
@@ -27,6 +30,9 @@ export class GameScene extends Scene {
 		const symbolTextures: Record<number, Texture> = {
 			1: await Assets.load(symbol1Image),
 			2: await Assets.load(symbol2Image),
+			3: await Assets.load(symbol3Image),
+			4: await Assets.load(symbol4Image),
+			5: await Assets.load(symbol5Image),
 		}
 		const reelsContainer = new ReelsContainerEntity(reelsBackgroundTexture, reelsFrameTexture, symbolTextures)
 		const ui = new GameUiEntity()
